@@ -59,7 +59,7 @@ class Test_Lab01 {
 		outputStream = "";
 		overridePrintStatements();
 		
-		String expectedOutput = "That’s so negative of you!";
+		String expectedOutput = "That's so negative of you!";
 		String[] inputs = {"-100", "15", "-5", "-1", "0", "5", "38", "500"};
 		
 		int i = 0;
