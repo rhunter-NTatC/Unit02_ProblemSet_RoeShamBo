@@ -146,7 +146,7 @@ class Test_Lab02 {
 		
 		boolean isOK = false;
 		int numLow = 0;
-		int numLowCount = 0;
+		int numLowPrinted = 0;
 		boolean isUneven = false;
 		boolean isUnevenFound = false;
 		
@@ -157,7 +157,7 @@ class Test_Lab02 {
 				outputStream = "";
 				isOK = false;
 				numLow = 0;
-				numLowCount = 0;
+				numLowPrinted = 0;
 				isUneven = false;
 				isUnevenFound = false;
 				
@@ -170,12 +170,30 @@ class Test_Lab02 {
 						isUneven = true;
 					}
 					else if (inputs[i][j].equals("low")) {
-						numLowCount++;
+						numLow++;
 					}
 				}
 				
+				if (isOK) {
+					Assertions.assertTrue(outputStream.toLowerCase().contains("ok") || 
+							    		  outputStream.toLowerCase().contains("good") || 
+										  outputStream.toLowerCase().contains("fine"));
+				}
 				
+				if (isUneven) {
+					Assertions.assertTrue(outputStream.toLowerCase().contains("uneven"));
+				}
 				
+				if (numLow > 0) {
+					for (int j = 0; j < outputStream.length() - 3; j++ ) {
+						if (outputStream.substring(j, j + 3).equals("low")) {
+							numLowPrinted++;
+						}
+					}
+					
+					Assertions.assertEquals(numLow, numLowPrinted);
+					
+				}
 				
 				
 				
@@ -196,10 +214,15 @@ class Test_Lab02 {
 			System.out.println("                tire 2 = " + inputs[i][0].substring(3, 5));
 			System.out.println("                tire 3 = " + inputs[i][0].substring(6, 8));
 			System.out.println("                tire 4 = " + inputs[i][0].substring(9));
-			if (inputs[i][1].equals("not"))
-				System.out.println("   Output should indicate the angles don't form a triangle.");
-			else
-				System.out.println("   Expected Output Should Contain: " + inputs[i][1]);
+			if (isOK)
+				System.out.println("   Output should indicate the tires are fine.");
+			if (numLow == 1)
+				System.out.println("   Output should indicate which tire is low.");
+			else if (numLow > 1) {
+				System.out.println("   Output should indicate which " + numLow + " tires are low.");
+			}
+			if (isUneven)
+				System.out.println("   Output should indicate the tires are uneven.");
 			System.out.println("   Your Output: \n" + outputStream + "\n\n\n\n");
 			Assertions.fail();
 			
