@@ -148,7 +148,6 @@ class Test_Lab02 {
 		int numLow = 0;
 		int numLowPrinted = 0;
 		boolean isUneven = false;
-		boolean isUnevenFound = false;
 		
 		try {
 			
@@ -159,7 +158,8 @@ class Test_Lab02 {
 				numLow = 0;
 				numLowPrinted = 0;
 				isUneven = false;
-				isUnevenFound = false;
+				provideInput(inputs[i][0]);
+				Lab02.problem3();
 				
 				for (int j = 0; j < inputs[i].length; j++) {
 					if (inputs[i][j].equals("fine")) {
@@ -175,9 +175,9 @@ class Test_Lab02 {
 				}
 				
 				if (isOK) {
-					Assertions.assertTrue(outputStream.toLowerCase().contains("ok") || 
-							    		  outputStream.toLowerCase().contains("good") || 
-										  outputStream.toLowerCase().contains("fine"));
+					Assertions.assertTrue(outputStream.toLowerCase().contains("ok") 
+							    	   || outputStream.toLowerCase().contains("good") 
+							    	   || outputStream.toLowerCase().contains("fine"));
 				}
 				
 				if (isUneven) {
@@ -185,8 +185,8 @@ class Test_Lab02 {
 				}
 				
 				if (numLow > 0) {
-					for (int j = 0; j < outputStream.length() - 3; j++ ) {
-						if (outputStream.substring(j, j + 3).equals("low")) {
+					for (int j = 0; j < outputStream.length() - 2; j++ ) {
+						if (outputStream.substring(j, j + 3).equalsIgnoreCase("low")) {
 							numLowPrinted++;
 						}
 					}
